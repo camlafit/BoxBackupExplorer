@@ -195,27 +195,27 @@ ${:endif}$
 
 <form name="extract" action="${request_uri}$" method="post">
 <input type="hidden" name="dir" value="${dir}$" />
-<table border="0" cellpadding="2" cellspacing="1">
+<table class="explorer">
 <thead>
-<tr bgcolor="#dddddd">
-    <th width="16" bgcolor="#ffffff">&nbsp;</th>
-    <th><a href="${script_name}$?dir=${dir}$/.."><img src="${path_images}$/folder_up.gif" title="Up" alt="parent directory"/></a></th>
-    <th width="340" align="left">Name</th>
-    <th width="60" align="right">Size</th>
-    <th width="150" align="right">Last Modified</th>
-    <th>Extract</th>
-    <th width="16" bgcolor="#ffffff">&nbsp;</th>
+<tr>
+    <th class="develop">&nbsp;</th>
+    <th class="type"><a href="${script_name}$?dir=${dir}$/.."><img src="${path_images}$/folder_up.gif" title="Up" alt="parent directory"/></a></th>
+    <th class="name">Name</th>
+    <th class="size">Size</th>
+    <th class="date_modified">Last Modified</th>
+    <th class="extract">Extract</th>
+    <th class="error">&nbsp;</th>
 </tr>
 </thead>
-
 ${if content:}$
     ${
         folded_img = ['toggle_plus.gif', 'toggle_minus.gif']
         folded_cls = ['hidden', 'visible']
         bgcolor = ['#f9f9f9', '#f0f0f0']
+        style = ['even', 'odd']
         switch = 0
     }$
-    <tbody style="background-color: ${bgcolor[switch]}$;">
+    <tbody>
     ${for items in content:}$
         ${for item in items:}$
             ${if len(items) > 1 and item['old']:}$
@@ -223,20 +223,19 @@ ${if content:}$
                     class="t_${item['md5']}$ ${emit(folded_cls[int(item['md5'] in extracted)])}$"
                     style="background-color: ${bgcolor[switch]}$;">
             ${:else:}$
-                <tr>
+	        <tr class="${style[switch]}$">
             ${:endif}$
-            <td bgcolor="#ffffff">
+            <td class="develop">
                 ${if len(items) > 1 and not item['old']:}$
                     <img src="${path_images}$/${emit(folded_img[int(item['md5'] in extracted)])}$"
                         id="${item['md5']}$"
-                        style="cursor:pointer;"
                         onclick="toggle(this);"
                         alt="display file history" />
                 ${:else:}$
                     &nbsp;
                 ${:endif}$
             </td>
-            <td>
+            <td class="type">
                 ${
                     if item['deleted']:
                         image = '_x'
@@ -259,7 +258,7 @@ ${if content:}$
                     <img src="${path_images}$/${'file%s.gif' % image}$" title="${title}$" alt="file type"/>
                 ${:endif}$
             </td>
-            <td>
+            <td class="name">
                 ${if item['attributes']:}$
                     <img src="${path_images}$/flag_a.gif" align="right"
                         title="Has attributes stored in directory record which override attributes in backup file" alt=""/>
@@ -271,13 +270,13 @@ ${if content:}$
                     ${item['name']}$
                 ${:endif}$
             </td>
-            <td align="right">${item['size']}$</td>
-            <td align="right">${item['modified']}$</td>
-            <td align="center">
+            <td class="size">${item['size']}$</td>
+            <td class="date_modified">${item['modified']}$</td>
+            <td class="extract">
                 <input type="checkbox" name="source"
                     value="${'%(file)i|%(deleted)i|%(old)i|%(id)s|%(name)s' % item}$" />
             </td>
-            <td bgcolor="#ffffff">
+            <td class="error">
             ${if extracted.get(item['id']) == -1:}$
                 <img src="${path_images}$/failed.gif" title="Extraction failed" alt="Extraction failed" />
             ${:elif extracted.get(item['id']) == 1:}$

@@ -4,6 +4,71 @@ body {
     font: 76% Helvetica,Arial,sans-serif;
     background-color: #fff;
 }
+
+table thead th {
+    background-color : #ddd;
+}
+
+table.explorer {
+    border : none;
+    border-spacing: 1px;
+}
+
+table.explorer .develop,
+table.explorer .error {
+    background-color : #fff;
+    width : 16px;
+}
+
+table.explorer .develop a {
+    border : none;
+    text-decoration : none;
+    border : none;
+    width : 16px;
+    height : 16px;
+    display : block;
+    background: transparent url(../images/toggle_plus.gif) center center;
+}
+
+table.explorer .develop a.hidden {
+    background: transparent url(../images/toggle_minus.gif) center center;
+}
+
+
+table.explorer tbody .develop {
+    cursor:pointer;
+}
+
+
+table.explorer tr.hidden {
+    display : none;
+}
+
+table.explorer .name {
+    width : 340px;
+    text-align :left;
+}
+
+table.explorer .size {
+    width : 60px;
+    text-align : right;
+}
+
+table.explorer .date_modified {
+    width : 150px;
+    text-align :right;
+}
+
+table td {
+    padding:2px;    
+}
+
+table tr.even {
+    background-color : #f9f9f9;
+}
+table tr.odd {
+    background-color : #f0f0f0;
+}
 a {
     text-decoration: none;
     color: #000;
