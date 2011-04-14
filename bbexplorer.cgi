@@ -142,77 +142,7 @@ class CgiAccess(object):
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Box Backup [${dir}$]</title>
-<style type="text/css">
-body {
-    margin: 20px 30px 20px 10px;
-    padding: 0;
-    font: 76% Helvetica,Arial,sans-serif;
-    background-color: #fff;
-}
-a {
-    text-decoration: none;
-    color: #000;
-}
-a:hover {
-    text-decoration: underline;
-    color: #000;
-}
-img {
-    border: none;
-    vertical-align: middle;
-}
-#path {
-    margin: 0 0 20px 22px;
-    padding: 5px 155px 5px 5px;
-    border: solid 1px #aaa;
-    background-color: #e3e5ed;
-    background-image: url(${path_images}$/bblogo.gif);
-    background-repeat: no-repeat;
-    background-position: right;
-}
-#info {
-    margin: 0 0 20px 22px;
-    padding: 5px 25px;
-    border: solid 1px #aaa;
-    background-color: #ffffe1;
-    background-image: url(${path_images}$/info.gif);
-    background-repeat: no-repeat;
-    background-position: 4px 4px;
-}
-#error {
-    margin: 0 0 20px 22px;
-    padding: 5px 25px;
-    border: solid 1px #aaa;
-    background-color: #ffffe1;
-    background-image: url(${path_images}$/error.gif);
-    background-repeat: no-repeat;
-    background-position: 4px 4px;
-}
-tbody.hidden {
-    display: none;
-    visibility: hidden;
-}
-tbody.visible {
-    display:;
-    visibility: visible;
-}
-img.chart {
-    background-color: #eef;
-    border: solid 1px #99f;
-}
-td.border {
-    padding: 5px;
-    border: 2px solid #ddd;
-    border-top: none;
-}
-#footer {
-    margin: 50px 0 20px 22px;
-    padding: 5px 25px;
-    border-top: solid 1px #999;
-    text-align: center;
-    font-size: 0.8em;
-}
-</style>
+<link href="./css/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 <!--
 function toggle(img) {
