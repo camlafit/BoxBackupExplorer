@@ -171,7 +171,7 @@ function prompt() {
 
 <body>
 <div id="path">
-<a href="${script_name}$?dir=/">&nbsp/</a>
+<a href="${script_name}$?dir=/">&nbsp;/</a>
 ${
     cdir = ''
     for item in dir.split('/')[1:]:
@@ -188,14 +188,13 @@ ${if message['info']:}$
     <div id="info">${'<br />'.join(message['info'])}$</div>
 ${:endif}$
 
-<form name="extract" action="${request_uri}$" method="POST">
+<form name="extract" action="${request_uri}$" method="post">
 <input type="hidden" name="dir" value="${dir}$" />
 <table border="0" cellpadding="2" cellspacing="1">
 <thead>
 <tr bgcolor="#dddddd">
     <th width="16" bgcolor="#ffffff">&nbsp;</th>
-    <th><a href="${script_name}$?dir=${dir}$/.."
-        ><img src="${path_images}$/folder_up.gif" title="Up" /></a></th>
+    <th><a href="${script_name}$?dir=${dir}$/.."><img src="${path_images}$/folder_up.gif" title="Up" alt="parent directory"/></a></th>
     <th width="340" align="left">Name</th>
     <th width="60" align="right">Size</th>
     <th width="150" align="right">Last Modified</th>
@@ -220,7 +219,8 @@ ${if content:}$
                     <img src="${path_images}$/${emit(folded_img[int(item['md5'] in extracted)])}$"
                         id="${item['md5']}$"
                         style="cursor:pointer;"
-                        onclick="toggle(this);" />
+                        onclick="toggle(this);"
+                        alt="display file history" />
                 ${:else:}$
                     &nbsp;
                 ${:endif}$
@@ -242,16 +242,16 @@ ${if content:}$
                 }$
                 ${if item['directory']:}$
                     <a href="${script_name}$?dir=${dir}$/${item['name']}$">
-                    <img src="${path_images}$/${'folder%s.gif' % image}$" title="${title}$" />
+                    <img src="${path_images}$/${'folder%s.gif' % image}$" title="${title}$" alt="directory type"/>
                     </a>
                 ${:else:}$
-                    <img src="${path_images}$/${'file%s.gif' % image}$" title="${title}$" />
+                    <img src="${path_images}$/${'file%s.gif' % image}$" title="${title}$" alt="file type"/>
                 ${:endif}$
             </td>
             <td>
                 ${if item['attributes']:}$
                     <img src="${path_images}$/flag_a.gif" align="right"
-                        title="Has attributes stored in directory record which override attributes in backup file" />
+                        title="Has attributes stored in directory record which override attributes in backup file" alt=""/>
                 ${:endif}$
                 ${if item['directory']:}$
                     <a href="${script_name}$?dir=${dir}$/${item['name']}$">
@@ -268,9 +268,9 @@ ${if content:}$
             </td>
             <td bgcolor="#ffffff">
             ${if extracted.get(item['id']) == -1:}$
-                <img src="${path_images}$/failed.gif" title="Extraction failed" />
+                <img src="${path_images}$/failed.gif" title="Extraction failed" alt="Extraction failed" />
             ${:elif extracted.get(item['id']) == 1:}$
-                <img src="${path_images}$/ok.gif" title="Extraction succeeded" />
+                <img src="${path_images}$/ok.gif" title="Extraction succeeded" alt="Extraction succeeded"/>
             ${:else:}$
                 &nbsp;
             ${:endif}$
@@ -288,12 +288,14 @@ ${if content:}$
             switch = abs(switch - 1)
         }$
     ${:endfor}$
-    
+    </tbody>
+</table>
+<table class="restore">
     <tbody>
     <tr><td height="40" colspan="7"></td></tr>
     <tr>
         <td></td>
-        <td bgcolor="#dddddd"><img src="${path_images}$/restore.gif" /></td>
+        <td bgcolor="#dddddd"><img src="${path_images}$/restore.gif" alt="restore icon" /></td>
         <td colspan="4" bgcolor="#dddddd"><b>Restore to client</b></td>
         <td></td>
     </tr>
@@ -327,12 +329,13 @@ ${if content:}$
         <td></td>
     </tr>
     </tbody>
-    
+</table>
+<table class="download">
     <tbody>
     <tr><td height="20" colspan="8"></td></tr>
     <tr>
         <td></td>
-        <td bgcolor="#dddddd"><img src="${path_images}$/load.gif" /></td>
+        <td bgcolor="#dddddd"><img src="${path_images}$/load.gif" alt="load icon"/></td>
         <td colspan="4" bgcolor="#dddddd"><b>Download</b></td>
         <td></td>
     </tr>
@@ -355,19 +358,20 @@ ${:elif not message['error']:}$
     <tbody>
     <tr>
         <td></td>
-        <td><img src="${path_images}$/empty.gif" /></td>
+        <td><img src="${path_images}$/empty.gif" alt="empty directory"/></td>
         <td colspan="4">Directory '${dir}$' is empty</td>
         <td></td>
     </tr>
     </tbody>
 ${:endif}$
-    
+</table>
+<table class="usage">
 ${if usage:}$
     <tbody>
     <tr><td height="40" colspan="8"></td></tr>
     <tr>
         <td></td>
-        <td bgcolor="#dddddd"><img src="${path_images}$/chart.gif" /></td>
+        <td bgcolor="#dddddd"><img src="${path_images}$/chart.gif" alt="chart icon" /></td>
         <td colspan="4" bgcolor="#dddddd"><b>Usage</b></td>
         <td></td>
     </tr>
@@ -384,7 +388,8 @@ ${if usage:}$
                     ><img src="${path_images}$/pix.gif"
                         height="10"
                         width="${emit(item['percentage']*3+1)}$"
-                        class="chart" /></td>
+                        class="chart" 
+                        alt="percentage usage"/></td>
                 </tr>
             ${:endfor}$
             </table>
@@ -400,7 +405,7 @@ ${:endif}$
 <div id="footer">
 <a href="http://www.joonis.de" target="_blank"><img
     src="http://www.joonis.de/common/images/joonis_button.gif"
-    title="joonis new media" /></a>
+    title="joonis new media" alt="joonis footer"/></a>
 <a href="http://www.joonis.de/boxbackup-explorer"
     target="_blank">Box Backup Explorer 0.2.3</a>
 </div>
