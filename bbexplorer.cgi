@@ -209,9 +209,6 @@ ${:endif}$
 </thead>
 ${if content:}$
     ${
-        folded_img = ['toggle_plus.gif', 'toggle_minus.gif']
-        folded_cls = ['hidden', 'visible']
-        bgcolor = ['#f9f9f9', '#f0f0f0']
         style = ['even', 'odd']
         switch = 0
     }$
@@ -220,8 +217,7 @@ ${if content:}$
         ${for item in items:}$
             ${if len(items) > 1 and item['old']:}$
                 <tr id=""
-                    class="t_${item['md5']}$ hidden"
-                    style="background-color: ${bgcolor[switch]}$;">
+                    class="t_${item['md5']}$ hidden ${style[switch]}$">
             ${:else:}$
 	        <tr class="${style[switch]}$">
             ${:endif}$
