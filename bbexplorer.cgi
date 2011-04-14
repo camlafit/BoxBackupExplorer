@@ -143,6 +143,8 @@ class CgiAccess(object):
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Box Backup [${dir}$]</title>
 <link href="./css/main.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 <!--
 function toggle(img) {
@@ -159,6 +161,15 @@ function prompt() {
     }
     return true;
 }
+$(document).ready(function() { 
+    $("table").tablesorter({
+        headers: { 
+            // assign the secound column (we start counting zero) 
+            // disable it by setting the property sorter to false 
+            0: { sorter: false } 
+        }
+    }); 
+}); 
 //-->
 </script>
 </head>
