@@ -169,7 +169,16 @@ $(document).ready(function() {
             0: { sorter: false } 
         }
     }); 
-}); 
+    
+    $("#showhiddenfile").click(function() {
+        $("td.name a:contains('.')").each(function() {
+            if ($.trim(this.text).indexOf('.') == 0) {
+                $(this).parents('tr').toggle();            
+            } 
+        });
+        return false;
+    });
+});
 //-->
 </script>
 </head>
@@ -195,6 +204,7 @@ ${:endif}$
 
 <form name="extract" action="${request_uri}$" method="post">
 <input type="hidden" name="dir" value="${dir}$" />
+<a href="" id="showhiddenfile">Toggle hidden file</a>
 <table class="explorer">
 <thead>
 <tr>
