@@ -146,14 +146,8 @@ class CgiAccess(object):
 <script type="text/javascript">
 <!--
 function toggle(img) {
-    tbody = document.getElementById('t_'+img.id);
-    if (tbody.className == 'hidden') {
-        img.src = '${path_images}$/toggle_minus.gif';
-        tbody.className = 'visible';
-    } else {
-        img.src = '${path_images}$/toggle_plus.gif';
-        tbody.className = 'hidden';
-    }
+    $('tr.t_'+img.id).toggleClass('hidden');
+    $('#'+img.id).toggleClass('hidden');
 }
 function prompt() {
     frm = document.forms.extract;
@@ -210,10 +204,16 @@ ${if content:}$
         bgcolor = ['#f9f9f9', '#f0f0f0']
         switch = 0
     }$
+    <tbody style="background-color: ${bgcolor[switch]}$;">
     ${for items in content:}$
-        <tbody style="background-color: ${bgcolor[switch]}$;">
         ${for item in items:}$
-            <tr>
+            ${if len(items) > 1 and item['old']:}$
+                <tr id=""
+                    class="t_${item['md5']}$ ${emit(folded_cls[int(item['md5'] in extracted)])}$"
+                    style="background-color: ${bgcolor[switch]}$;">
+            ${:else:}$
+                <tr>
+            ${:endif}$
             <td bgcolor="#ffffff">
                 ${if len(items) > 1 and not item['old']:}$
                     <img src="${path_images}$/${emit(folded_img[int(item['md5'] in extracted)])}$"
@@ -276,14 +276,7 @@ ${if content:}$
             ${:endif}$
             </td>
             </tr>
-            ${if len(items) > 1 and not item['old']:}$
-                </tbody>
-                <tbody id="t_${item['md5']}$"
-                    class="${emit(folded_cls[int(item['md5'] in extracted)])}$"
-                    style="background-color: ${bgcolor[switch]}$;">
-            ${:endif}$
         ${:endfor}$
-        </tbody>
         ${
             switch = abs(switch - 1)
         }$
