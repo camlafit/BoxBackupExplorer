@@ -232,29 +232,27 @@ ${if content:}$
                     &nbsp;
                 ${:endif}$
             </td>
-            <td class="type">
-                ${
-                    if item['deleted']:
-                        image = '_x'
-                        title = 'Deleted on client'
-                    elif item['remove']:
-                        image = '_r'
-                        title = 'Will be removed from backup as soon as marked deleted or old'
-                    elif item['new']:
-                        image = '_n'
-                        title = 'New or currently updated'
-                    else:
-                        image = ''
-                        title = ''
-                }$
-                ${if item['directory']:}$
-                    <a href="${script_name}$?dir=${dir}$/${item['name']}$">
-                    <img src="${path_images}$/${'folder%s.gif' % image}$" title="${title}$" alt="directory type"/>
-                    </a>
+            ${
+                if item['deleted']:
+                    image = '_x'
+                    title = 'Deleted on client'
+                elif item['remove']:
+                    image = '_r'
+                    title = 'Will be removed from backup as soon as marked deleted or old'
+                elif item['new']:
+                    image = '_n'
+                    title = 'New or currently updated'
+                else:
+                    image = ''
+                    title = ''
+            }$
+            ${if item['directory']:}$
+                <td class="type directory ${image}$">
+                    <a href="${script_name}$?dir=${dir}$/${item['name']}$">&nbsp;</a>
+                </td>
                 ${:else:}$
-                    <img src="${path_images}$/${'file%s.gif' % image}$" title="${title}$" alt="file type"/>
+                <td class="type file ${image}$"></td>
                 ${:endif}$
-            </td>
             <td class="name">
                 ${if item['attributes']:}$
                     <img src="${path_images}$/flag_a.gif" align="right"
