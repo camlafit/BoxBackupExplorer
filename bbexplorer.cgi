@@ -220,17 +220,18 @@ ${if content:}$
         ${for item in items:}$
             ${if len(items) > 1 and item['old']:}$
                 <tr id=""
-                    class="t_${item['md5']}$ ${emit(folded_cls[int(item['md5'] in extracted)])}$"
+                    class="t_${item['md5']}$ hidden"
                     style="background-color: ${bgcolor[switch]}$;">
             ${:else:}$
 	        <tr class="${style[switch]}$">
             ${:endif}$
             <td class="develop">
                 ${if len(items) > 1 and not item['old']:}$
-                    <img src="${path_images}$/${emit(folded_img[int(item['md5'] in extracted)])}$"
+                    <a href=""
                         id="${item['md5']}$"
-                        onclick="toggle(this);"
-                        alt="display file history" />
+                        onclick="toggle(this);return false;">
+                    &nbsp;
+                    </a>
                 ${:else:}$
                     &nbsp;
                 ${:endif}$
